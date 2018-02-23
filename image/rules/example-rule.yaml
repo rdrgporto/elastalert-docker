@@ -1,0 +1,13 @@
+name: Example rule
+type: frequency
+index: logstash-*
+num_events: 50
+timeframe:
+    hours: 4
+filter:
+- term:
+    some_field: "some_value"
+alert:
+- "email"
+email:
+- "elastalert@example.com"

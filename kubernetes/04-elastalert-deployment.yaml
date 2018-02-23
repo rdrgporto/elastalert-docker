@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: elastalert
+  namespace: kube-elastalert
+  labels:
+   k8s-app: elastalert
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: elastalert
+    spec:
+      containers:
+      - name: elastalert
+        image: rdrg/elastalert-docker:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: config
+          mountPath: /opt/config
+        - name: rules
+          mountPath: /opt/rules
+      volumes:
+        - name: rules
+          configMap:
+            name: logstash-rule
+        - name: config
+          configMap:
+            name: elast-config

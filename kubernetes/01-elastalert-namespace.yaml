@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kube-elastalert
+  labels:
+    k8s-app: elastalert
