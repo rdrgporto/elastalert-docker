@@ -1,6 +1,9 @@
+# Alpine image
 FROM alpine
 
-MAINTAINER EdnonLabs
+# Docker labels
+LABEL maintainer="https://github.com/rdrgporto" \
+      description="Elastalert on Docker & Kubernetes"
 
 # URL from which to download Elastalert.
 ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/master.zip
@@ -15,8 +18,10 @@ ENV ELASTALERT_HOME /opt/elastalert
 # Elastalert timezone
 ENV TZ Europe/Madrid
 
+# Move to /opt
 WORKDIR /opt
 
+# Install dependencies
 RUN apk update && apk add \
   bzr \
   cvs \
@@ -35,11 +40,13 @@ RUN apk update && apk add \
   openntpd \
   wget
 
+# Download Elastalert
 RUN wget -O elastalert.zip "${ELASTALERT_URL}" && \
   unzip elastalert.zip && \
   rm elastalert.zip && \
   mv e* "${ELASTALERT_HOME}"
 
+# Move to Elastalert home
 WORKDIR "${ELASTALERT_HOME}"
 
 # Install Elastalert.
@@ -66,6 +73,7 @@ RUN apk del \
   openssl-dev \
   libffi-dev
 
+# Clean cache
 RUN rm -rf /var/cache/apk/*
 
 # Define mount points.
