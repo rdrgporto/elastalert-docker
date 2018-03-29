@@ -1,5 +1,7 @@
 # Welcome to Elastalert Docker & Kubernetes! :whale: :sailboat:
 
+[![Build Status](https://travis-ci.org/rdrgporto/elastalert-docker.svg?branch=master)](https://travis-ci.org/rdrgporto/elastalert-docker)
+
 This repository was created in order to make easier to integrate **Elastalert** on **Docker** and **Kubernetes**.
 
 ## First Steps
