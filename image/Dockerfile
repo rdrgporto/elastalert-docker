@@ -18,6 +18,7 @@ ENV ELASTALERT_HOME /opt/elastalert
 # Elastalert timezone
 ENV TZ Europe/Madrid
 
+
 # Move to /opt
 WORKDIR /opt
 
@@ -48,6 +49,12 @@ RUN wget -O elastalert.zip "${ELASTALERT_URL}" && \
 
 # Move to Elastalert home
 WORKDIR "${ELASTALERT_HOME}"
+
+# Installl dateutil & jira
+# https://github.com/Yelp/elastalert/issues/1603
+# https://github.com/Yelp/elastalert/issues
+RUN pip install python-dateutil==2.6.1
+RUN pip install jira==1.0.15
 
 # Install Elastalert.
 RUN python setup.py install && \
