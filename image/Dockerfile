@@ -5,15 +5,15 @@ FROM alpine
 LABEL maintainer="https://github.com/rdrgporto" \
       description="Elastalert on Docker & Kubernetes"
 
-# URL from which to download Elastalert.
-ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/master.zip
-# Directory holding configuration for Elastalert and Supervisor.
+# URL from which to download Elastalert
+ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/v0.1.33.zip
+# Directory holding configuration for Elastalert and Supervisor
 ENV CONFIG_DIR /opt/config
-# Elastalert rules directory.
+# Elastalert rules directory
 ENV RULES_DIRECTORY /opt/rules
-# Directory to which Elastalert and Supervisor logs are written.
+# Directory to which Elastalert and Supervisor logs are written
 ENV LOG_DIR /opt/logs
-# Elastalert home directory full path.
+# Elastalert home directory full path
 ENV ELASTALERT_HOME /opt/elastalert
 # Elastalert timezone
 ENV TZ Europe/Madrid
