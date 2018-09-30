@@ -6,7 +6,7 @@ LABEL maintainer="https://github.com/rdrgporto" \
       description="Elastalert on Docker & Kubernetes"
 
 # URL from which to download Elastalert
-ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/v0.1.33.zip
+ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/v0.1.36.zip
 # Directory holding configuration for Elastalert and Supervisor
 ENV CONFIG_DIR /opt/config
 # Elastalert rules directory
