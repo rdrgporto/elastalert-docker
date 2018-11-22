@@ -12,8 +12,8 @@ spec:
       labels:
         k8s-app: elastalert
     spec:
-      containers:
       serviceAccountName: elastalert
+      containers:
       - name: elastalert
         image: rdrg/elastalert-docker:latest
         imagePullPolicy: Always
