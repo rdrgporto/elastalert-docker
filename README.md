@@ -81,5 +81,5 @@ Deploy **Elastalert**:
 
 ```
 cd elastalert-docker
-kubectl create -f kubernetes/
+kubectl apply -f kubernetes/
 ```
