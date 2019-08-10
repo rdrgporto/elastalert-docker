@@ -6,7 +6,7 @@ LABEL maintainer="https://github.com/rdrgporto" \
       description="Elastalert on Docker & Kubernetes"
 
 # URL from which to download Elastalert
-ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/v0.1.38.zip
+ENV ELASTALERT_URL https://github.com/Yelp/elastalert/archive/v0.1.39.zip
 # Directory holding configuration for Elastalert and Supervisor
 ENV CONFIG_DIR /opt/config
 # Elastalert rules directory
@@ -17,7 +17,6 @@ ENV LOG_DIR /opt/logs
 ENV ELASTALERT_HOME /opt/elastalert
 # Elastalert timezone
 ENV TZ Europe/Madrid
-
 
 # Move to /opt
 WORKDIR /opt
@@ -39,6 +38,7 @@ RUN apk update && apk add \
   musl-dev \
   tzdata \
   openntpd \
+  libmagic \
   wget
 
 # Download Elastalert
@@ -50,11 +50,12 @@ RUN wget -O elastalert.zip "${ELASTALERT_URL}" && \
 # Move to Elastalert home
 WORKDIR "${ELASTALERT_HOME}"
 
-# Installl dateutil & jira
+# Install dateutil & jira
 # https://github.com/Yelp/elastalert/issues/1603
 # https://github.com/Yelp/elastalert/issues
-RUN pip install python-dateutil==2.6.1
-RUN pip install jira==1.0.15
+RUN pip install \
+    python-dateutil==2.6.1 \
+    jira==1.0.15
 
 # Install Elastalert.
 RUN python setup.py install && \
@@ -86,10 +87,10 @@ RUN rm -rf /var/cache/apk/*
 # Define mount points.
 VOLUME [ "${CONFIG_DIR}", "${RULES_DIRECTORY}", "${LOG_DIR}"]
 
-# Add configuration files and example rule
-ADD config/elastalert_config.yaml ${CONFIG_DIR}
-ADD config/elastalert_supervisord.conf ${CONFIG_DIR}
-ADD rules/example-rule.yaml ${RULES_DIRECTORY}
+# Copy configuration files and rule example
+COPY config/elastalert_config.yaml ${CONFIG_DIR}
+COPY config/elastalert_supervisord.conf ${CONFIG_DIR}
+COPY rules/example-rule.yaml ${RULES_DIRECTORY}
 
 # Start Elastalert
 CMD ["/usr/bin/supervisord","-c","/opt/config/elastalert_supervisord.conf","-n"]

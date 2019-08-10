@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elastalert
@@ -7,6 +7,9 @@ metadata:
    k8s-app: elastalert
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: elastalert
   template:
     metadata:
       labels:
@@ -15,8 +18,7 @@ spec:
       serviceAccountName: elastalert
       containers:
       - name: elastalert
-        image: rdrg/elastalert-docker:latest
-        imagePullPolicy: Always
+        image: rdrg/elastalert-docker:0.1.39
         volumeMounts:
         - name: config
           mountPath: /opt/config
