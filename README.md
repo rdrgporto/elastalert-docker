@@ -1,30 +1,45 @@
-# Welcome to Elastalert Docker! :whale: :sailboat:
+# Welcome to Elastalert Docker! :whale:
 
 This repository was created in order to make easier to integrate **Elastalert** on **Docker**.
 
 ## First Steps
 
-* Download **Docker** : [Link](https://docs.docker.com/install/linux/docker-ce/ubuntu/#os-requirements)
-* **Elastalert** doc: [Link](https://elastalert.readthedocs.io/en/latest/)
+* Install **Docker** : [Link](https://docs.docker.com/engine/install/)
+* Take a quick look over **Elastalert** doc: [Link](https://elastalert.readthedocs.io/en/latest/)
 
-## Create/Edit Dockerfile
+## Up
 
 If you want to edit the image, for example, change to a new version, install a new package, and so on, you can follow this guide:
 
-Download **repository**:
+### <u>Install Git</u>
 
-```
+- #### Linux :penguin:
+
+```bash
+sudo apt -y install git --> Ubuntu/Debian
+sudo yum -y install git --> CentOS/RedHat
+
 git clone https://github.com/rdrgporto/elastalert-docker.git
 ```
 
-Edit **Dockerfile** with your favorite text editor and create image:
+- #### Windows :checkered_flag:
 
-```
-docker build -t john-doe/elastalert-docker
+  Download [Git Bash](https://gitforwindows.org/) and install it:
+
+```bash
+git clone https://github.com/rdrgporto/elastalert-docker.git
 ```
 
-Run **container**:
+### <u>Run</u> :rocket:
 
+Create **Docker** image:
+
+```bash
+docker image build -t elastalert-docker:latest -f Dockerfile .
 ```
-docker run --name elastalert-docker-test john-doe/elastalert-docker
+
+Run container:
+
+```bash
+docker container run --name elastalert elastalert-docker:latest 
 ```
